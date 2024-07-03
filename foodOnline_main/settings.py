@@ -135,6 +135,8 @@ MEDIA_ROOT= BASE_DIR/'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 from django.contrib.messages import constants as messages
 
@@ -142,3 +144,16 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 
 }
+
+#Email configuration
+EMAIL_BACKEND = config('EMAIL_BACKEND')
+EMAIL_HOST=config('EMAIL_HOST')
+EMAIL_PORT=config('EMAIL_PORT',cast=int)
+EMAIL_HOST_USER=config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS=True
+DEFAULT_FROM_EMAIL='foodOnline Marketplace <rsinghal9090@gmail.com>'
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000/']
+CSRF_COOKIE_SECURE = False  # Ensure this is False during development
+CSRF_USE_SESSIONS = True
