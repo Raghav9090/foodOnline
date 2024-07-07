@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'accounts.context_processors.get_vendor',
+                'accounts.context_processors.get_google_api',
             ],
         },
     },
@@ -158,3 +159,6 @@ DEFAULT_FROM_EMAIL='foodOnline Marketplace <rsinghal9090@gmail.com>'
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000/']
 CSRF_COOKIE_SECURE = False  # Ensure this is False during development
 CSRF_USE_SESSIONS = True
+
+
+GOOGLE_API_KEY='AIzaSyAFbtyF9VnAyZrn1ybDD8A8HcVZxqqOjBg'
