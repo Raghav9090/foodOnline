@@ -1,6 +1,7 @@
 from smtplib import SMTPAuthenticationError
 from django.shortcuts import render, redirect
 from django.middleware.csrf import get_token
+from django.template.defaultfilters import slugify
 
 from vendor.models import Vendor
 from .utils import detectUser,  send_verification_email
@@ -69,7 +70,7 @@ def registerUser(request):
 def registerVendor(request):
     if request.user.is_authenticated:
         messages.warning(request, 'You are already logged in')
-        return redirect('vendorDashboard')
+        return redirect('myAccount')
     elif request.method == 'POST':
         form = UserForm(request.POST)
         v_form = VendorForm(request.POST, request.FILES)
@@ -81,6 +82,8 @@ def registerVendor(request):
             
             vendor = v_form.save(commit=False)
             vendor.user = user
+            vendor_name = v_form.cleaned_data['vendor_name']
+            vendor.vendor_slug = slugify(vendor_name)+'-'+str(user.id)
             vendor.user_profile = user_profile
             vendor.save()
             try:
