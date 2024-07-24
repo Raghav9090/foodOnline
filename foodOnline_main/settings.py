@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'marketplace',
     'django.contrib.gis',
     'customers',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +76,7 @@ TEMPLATES = [
                 'marketplace.context_processors.get_cart_counter',
                 'marketplace.context_processors.get_cart_amounts',
                 'accounts.context_processors.get_user_profile',
+                'accounts.context_processors.get_paypal_client_id',
             ],
         },
     },
@@ -170,9 +172,17 @@ CSRF_COOKIE_SECURE = False  # Ensure this is False during development
 CSRF_USE_SESSIONS = True
 
 
-GOOGLE_API_KEY='AIzaSyAFbtyF9VnAyZrn1ybDD8A8HcVZxqqOjBg'
+GOOGLE_API_KEY = config('GOOGLE_API_KEY')
+
 
 
 os.environ['PATH'] = os.path.join(BASE_DIR, r'env\Lib\site-packages\osgeo') + ';' + os.environ['PATH']
 os.environ['PROJ_LIB'] = os.path.join(BASE_DIR, r'env\Lib\site-packages\osgeo\data\proj') + ';' + os.environ['PATH']
 GDAL_LIBRARY_PATH = os.path.join(BASE_DIR, r'env\Lib\site-packages\osgeo\gdal.dll')
+
+
+
+PAYPAL_CLIENT_ID = config('PAYPAL_CLIENT_ID')
+
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
